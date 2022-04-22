@@ -1,6 +1,6 @@
 import java.util.Enumeration;
 import java.util.Vector;
-
+//probando
 public class Customer {
     private String _name;
     private Vector _rentals = new Vector();
