@@ -13,9 +13,26 @@ public class Statement {
     }
 
     public String generate() {
-        initialize();
+        clearTotals();
         String statementText = header();
-        for (Rental rental : rentals) {
+        statementText += rentalLines();
+        //add footer lines
+        statementText += footer();
+        return statementText;
+    }
+    
+	private void clearTotals() {
+		totalAmount = 0;
+        frequentRenterPoints = 0;
+	}
+	
+	private String header() {
+		return String.format("Rental Record for %s \n", customerName);
+	}
+
+	private String rentalLines() {
+		String rentalLines = "";
+		for (Rental rental : rentals) {
             double thisAmount = 0;
 
             // determine amount for each line
@@ -42,24 +59,18 @@ public class Statement {
                     rental.getDaysRented() > 1) frequentRenterPoints ++;
 
             //show figures for this rental
-            statementText += "\t" + rental.getMovie().getTitle()+ "\t" +
+            rentalLines += "\t" + rental.getMovie().getTitle()+ "\t" +
                     String.valueOf(thisAmount) + "\n";
             totalAmount += thisAmount;
         }
-        //add footer lines
-        statementText += "You owed " + String.valueOf(totalAmount) + "\n";
-        statementText += "You earned " + String.valueOf(frequentRenterPoints) +
-                " frequent renter points\n";
-        return statementText;
-    }
-
-	private String header() {
-		return String.format("Rental Record for %s \n", customerName);
+		return rentalLines;
 	}
-
-	private void initialize() {
-		totalAmount = 0;
-        frequentRenterPoints = 0;
+	
+	private String footer() {	
+		return String.format(
+				"You owed %.1f\n"
+				+ "You earned %d frequent renter points\n",
+				totalAmount, frequentRenterPoints);
 	}
 
     public void addRental(Rental rental) {
