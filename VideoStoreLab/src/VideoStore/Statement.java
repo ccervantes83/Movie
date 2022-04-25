@@ -1,3 +1,4 @@
+package VideoStore;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,10 +59,6 @@ public class Statement {
 
     public void addRental(Rental rental) {
         rentals.add(rental);
-    }
-
-    public String getName() {
-        return customerName;
     }
 
 	public double getTotal() {
