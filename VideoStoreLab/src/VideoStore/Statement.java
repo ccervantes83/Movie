@@ -17,7 +17,6 @@ public class Statement {
         clearTotals();
         String statementText = header();
         statementText += rentalLines();
-        //add footer lines
         statementText += footer();
         return statementText;
     }
