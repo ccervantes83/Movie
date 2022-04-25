@@ -1,6 +1,6 @@
 public class Rental {
     private Movie movie;
-    private int daysRented;
+    int daysRented;
 
     public Rental(Movie movie, int daysRented) {
         this.movie = movie;
@@ -14,4 +14,16 @@ public class Rental {
     public int getDaysRented() {
         return daysRented;
     }
+
+	public String getTitle() {
+		return movie.getTitle();
+	}
+
+	double determineAmount() {
+		return movie.determineAmount(daysRented);
+	}
+	
+	int determineFrequentRenterPoints() {
+		return movie.determineFrequentRenterPoints(daysRented);
+	}
 }
